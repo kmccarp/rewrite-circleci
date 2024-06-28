@@ -53,7 +53,7 @@ public class InstallOrb extends Recipe {
             @Override
             public Yaml.Document visitDocument(Yaml.Document document, ExecutionContext ctx) {
                 Yaml.Document d = super.visitDocument(document, ctx);
-                if (!orbs.find(getCursor()).isPresent() || Boolean.TRUE.equals(getCursor().getMessage("INSERT_ORB"))) {
+                if (orbs.find(getCursor()).isEmpty() || Boolean.TRUE.equals(getCursor().getMessage("INSERT_ORB"))) {
                     doAfterVisit(new MergeYamlVisitor<>(document.getBlock(), "" +
                             "orbs:\n" +
                             "  " + orbKey + ": " + slug,
